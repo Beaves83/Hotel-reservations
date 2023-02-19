@@ -6,9 +6,11 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
+    "prettier": "prettier --ignore-path .gitignore --write './**/*.{ts,vue}'"
   },
   "dependencies": {
+    "prettier": "^2.8.4",
     "vue": "^3.2.26",
     "vue3-datepicker": "^0.3.1"
   },
@@ -19,6 +21,7 @@
     "@vue/eslint-config-typescript": "^10.0.0",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-vue": "^8.2.0",
     "postcss": "^8.4.5",
     "tailwindcss": "^3.0.15",
