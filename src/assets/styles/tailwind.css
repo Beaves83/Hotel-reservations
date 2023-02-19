@@ -7,9 +7,7 @@ body {
 }
 
 .primary-btn {
-  @apply bg-primary;
-  @apply p-2;
-  @apply text-white;
+  @apply bg-primary text-white p-2;
   font-size: 1rem;
   line-height: 1.5rem;
   min-width: 7rem;
