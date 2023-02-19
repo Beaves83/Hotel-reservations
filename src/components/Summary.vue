@@ -1,42 +1,31 @@
-<script lang="ts">
-import { defineComponent, reactive } from 'vue'
+<script setup lang="ts">
+import { reactive } from 'vue'
 
-export default defineComponent({
-  setup () {
-    const data = reactive({
-      roomName: '-',
-      checkinDate: '-',
-      checkoutDate: '-',
-      adults: '-',
-      total: '-',
-    });
-    const updateHotelData = (hotelData: any) => {
-      data.roomName = hotelData.name;
-      data.total = hotelData.amount;
-    };
-    const updateReservationData = (reservationData: any) => {
-      data.checkinDate = reservationData.startDate;
-      data.checkoutDate = reservationData.endDate;
-      data.adults = reservationData.adults;
-    }
-    const saveHandler = () => {
+const room = reactive({
+  roomName: '-',
+  checkinDate: '-',
+  checkoutDate: '-',
+  adults: '-',
+  total: '-',
+});
+const updateHotelData = (hotelData: any) => {
+  room.roomName = hotelData.name;
+  room.total = hotelData.amount;
+};
+const updateReservationData = (reservationData: any) => {
+  room.checkinDate = reservationData.startDate;
+  room.checkoutDate = reservationData.endDate;
+  room.adults = reservationData.adults;
+}
+const saveHandler = () => {
 
-    };
-
-    return {
-      data,
-      updateHotelData,
-      updateReservationData,
-      saveHandler,
-    };
-  }
-})
+};
 </script>
 
 <template>
   <div class="p-4 border border-gray-light">
     <h2 class="mb-8 text-xl"><strong>Reservation summary</strong></h2>
-    <h3 class="mb-4"><strong>{{ data.roomName }}</strong></h3>
+    <h3 class="mb-4"><strong>{{ room.roomName }}</strong></h3>
     <div class="mb-4 space-y-8 text-sm">
       <div class="flex space-x-12">
         <div>
@@ -50,19 +39,19 @@ export default defineComponent({
       </div>
       <div>
         <p><strong>Reservation date</strong></p>
-        <p>From {{ data.checkinDate }} to {{ data.checkoutDate }}</p>
+        <p>From {{ room.checkinDate }} to {{ room.checkoutDate }}</p>
       </div>
       <div>
         <p><strong>People</strong></p>
-        <p>{{ data.adults }} Adults</p>
+        <p>{{ room.adults }} Adults</p>
       </div>
     </div>
     <hr class="mb-4 border-0 border-t border-gray-light">
     <div class="flex justify-between mb-8">
       <p>Total</p>
-      <p>{{ data.total }}</p>
+      <p>{{ room.total }}</p>
     </div>
-    <button @click="saveHandler" class="button">Save</button>
+    <button class="button" @click="saveHandler">Save</button>
   </div>
 </template>
 

@@ -1,20 +1,12 @@
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref } from 'vue';
 import Datepicker from 'vue3-datepicker';
-import CustomSelect from './components/CustomSelect.vue';
-import Rooms from './components/Rooms.vue';
-import Summary from './components/Summary.vue';
+import CustomSelect from '@/components/CustomSelect.vue';
+import Rooms from '@/components/Rooms.vue';
+import Summary from '@/components/Summary.vue';
 
-export default defineComponent({
-  components: {
-    CustomSelect,
-    Datepicker,
-    Rooms,
-    Summary,
-  },
-  setup() {
-    const sd = ref();
-    const ed = ref();
+    const startDate = ref();
+    const endDate = ref();
     const adults = ref('');
     const children = ref('');
     const summary = ref(null);
@@ -22,28 +14,17 @@ export default defineComponent({
       if (summary.value) {
         summary.value.updateHotelData(room);
       }
-    }
+    };
     const modifyReservationHandler = () => {
       if (summary.value) {
         summary.value.updateReservationData({
-          startDate: new Intl.DateTimeFormat('en-US').format(sd.value),
-          endDate: new Intl.DateTimeFormat('en-US').format(ed.value),
+          startDate: new Intl.DateTimeFormat('en-US').format(startDate.value),
+          endDate: new Intl.DateTimeFormat('en-US').format(endDate.value),
           adults: adults.value
         })
         alert('Summary Updated');
       }
     };
-    return {
-      sd,
-      ed,
-      adults,
-      children,
-      selectRoom,
-      summary,
-      modifyReservationHandler,
-    }
-  }
-})
 </script>
 
 <template>
@@ -66,10 +47,10 @@ export default defineComponent({
     <div class="flex justify-center px-8 py-4 bg-primary bg-opacity-40">
       <div class="flex items-start space-x-4">
         <div class="calendar-wrapper">
-          <Datepicker v-model="sd" class="calendar-input" />
+          <Datepicker v-model="startDate" class="calendar-input" />
         </div>
         <div class="calendar-wrapper">
-          <Datepicker v-model="ed" class="calendar-input" />
+          <Datepicker v-model="endDate" class="calendar-input" />
         </div>
         <CustomSelect>
           <select v-model="adults">
@@ -93,7 +74,7 @@ export default defineComponent({
             <option value="6">Children: 6</option>
           </select>
         </CustomSelect>
-        <button @click="modifyReservationHandler" class="primary-btn">Modify</button>
+        <button class="primary-btn" @click="modifyReservationHandler" >Modify</button>
       </div>
     </div>
   </div>
@@ -131,7 +112,6 @@ export default defineComponent({
         </div>
       </div>
     </div>
-    div >
   </div>
 </template>
 <style scoped>
