@@ -10,8 +10,6 @@ const props = defineProps<{
       required: true,
     }, 
 }>();
-
-  // setup () {
     const myRooms = [
       {
         name: 'Mini Dreamy Room',
@@ -39,38 +37,44 @@ const props = defineProps<{
         people: '4',
         amount: '450€',
         img: img3,
-      }
-    ]
+      },
+    ];
 </script>
 <template>
   <div class="space-y-4">
-    <div 
+    <div
       v-for="room in myRooms"
       :key="room.name"
       class="p-4 transition-all duration-300 border cursor-pointer border-gray-light hover:bg-gray-light hover:bg-opacity-20 hover:shadow-sm"
-      @click="selectRoom(n)"
+      @click="selectRoom(room)"
     >
       <div class="flex space-x-4">
         <div class="w-1/3">
-          <img :src="room.img" alt="Mini Dreamy Room" class="object-cover w-full h-full">
+          <img 
+            :src="room.img" 
+            alt="Mini Dreamy Room" 
+            class="object-cover w-full h-full"
+          />
         </div>
         <div class="flex flex-col w-2/3 text-sm">
-          <p class="mb-2 text-base font-display"><strong>{{ room.name ? room.name : undefined }}</strong></p>
+          <p class="mb-2 text-base font-display">
+            <strong>{{ room.name ? room.name : undefined }}</strong>
+          </p>
           <p class="flex-1">{{ room.description }}</p>
           <p class="mb-6">Size: {{ room.size }}</p>
           <div class="flex items-baseline space-x-16">
             <div>
-              <img src="../assets/img/double-bed.svg" class="w-8 mb-1">
+              <img src='../assets/img/double-bed.svg' class="w-8 mb-1" />
               <p>Beds: {{ room.beds }}</p>
             </div>
-              <div class="flex-1">People: {{ room.people }}</div>
-          <div class="text-xl"><strong>{{ room.amount }}</strong></div>
+            <div class="flex-1">People: {{ room.people }}</div>
+          <div class="text-xl">
+            <strong>{{ room.amount }}</strong>
+          </div>
         </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-<style scoped>
-
-</style>
+<style scoped></style>

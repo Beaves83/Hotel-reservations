@@ -20,8 +20,8 @@ import Summary from '@/components/Summary.vue';
         summary.value.updateReservationData({
           startDate: new Intl.DateTimeFormat('en-US').format(startDate.value),
           endDate: new Intl.DateTimeFormat('en-US').format(endDate.value),
-          adults: adults.value
-        })
+          adults: adults.value,
+        });
         alert('Summary Updated');
       }
     };
@@ -35,7 +35,10 @@ import Summary from '@/components/Summary.vue';
       <a href="#" class="menu-btn">Restaurant</a>
     </div>
     <div class="flex justify-center w-1/3">
-      <img src="./assets/img/logo-cocos.png" alt="Hotel Los Cocos" class="logo">
+      <img 
+        src="./assets/img/logo-cocos.png" 
+        alt="Hotel Los Cocos" 
+        class="logo">
     </div>
     <div class="flex justify-between w-1/3">
       <a href="#" class="menu-btn">Weedings</a>
@@ -74,7 +77,9 @@ import Summary from '@/components/Summary.vue';
             <option value="6">Children: 6</option>
           </select>
         </CustomSelect>
-        <button class="primary-btn" @click="modifyReservationHandler" >Modify</button>
+        <button class="primary-btn" @click="modifyReservationHandler" >
+          Modify
+        </button>
       </div>
     </div>
   </div>
@@ -85,8 +90,7 @@ import Summary from '@/components/Summary.vue';
   </div>
   <div class="inline-block px-8 mb-16">
     <div class="float-left w-2/3">
-      <Rooms
-        :select-room="selectRoom"
+      <Rooms :select-room="selectRoom"
       />
     </div>
     <div class="float-right w-1/3 pl-4">
@@ -97,7 +101,7 @@ import Summary from '@/components/Summary.vue';
     <div class="flex justify-between mx-auto text-sm footer">
       <div class="flex items-center space-x-4">
         <div>
-          <img src="./assets/img/los-cocos-iso-footer.png" width="45">
+          <img src="./assets/img/los-cocos-iso-footer.png" width="45" />
         </div>
         <a href="#">Terms and Conditions</a>
         <a href="#">Privacy Policy</a>
@@ -108,57 +112,52 @@ import Summary from '@/components/Summary.vue';
         <a href="#">reservations@loscocosbungalows.com</a>
         <a href="#">Tlf: +34 555 555 555</a>
         <div>
-          <img src="./assets/img/footer_icons.png" width="125">
+          <img src="./assets/img/footer_icons.png" width="125" />
         </div>
       </div>
     </div>
   </div>
 </template>
 <style scoped>
-  .logo {
-    width: 125px;
-    height: auto;
-  }
-  .menu-btn {
-    @apply transition-colors;
-    @apply duration-300;
-  }
-  .menu-btn:hover {
-    @apply text-primary;
-  }
-  .hero {
-    @apply bg-cover;
-    @apply bg-center;
-    @apply bg-no-repeat;
-    background-image: url(./assets/img/los-cocos-room-header-2-x.png);
-  }
-  .calendar-wrapper {
-    position: relative;
-  }
-  .calendar-wrapper:before {
-    content: '';
-    position: absolute;
-    @apply right-2.5;
-    top: 50%;
-    transform: translateY(-50%);
-    display: block;
-    width: 25px;
-    height: 25px;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url(./assets/img/calendar-empty.svg);
-    z-index: 100;
-  }
-  .footer {
-    max-width: 80rem;
-  }
-</style>
-<style>
-  :root {
-    --vdp-hover-bg-color: theme('colors.primary');
-    --vdp-selected-bg-color: theme('colors.primary');
-  }
-  .calendar-input {
-    @apply p-2 pr-8;
-  }
+.logo {
+  width: 125px;
+  height: auto;
+}
+.menu-btn {
+  @apply transition-colors duration-300;
+}
+.menu-btn:hover {
+  @apply text-primary;
+}
+.hero {
+  @apply bg-cover bg-center bg-no-repeat;
+  background-image: url(./assets/img/los-cocos-room-header-2-x.png);
+}
+.calendar-wrapper {
+  position: relative;
+}
+.calendar-wrapper:before {
+  @apply right-2.5;
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(./assets/img/calendar-empty.svg);
+  z-index: 100;
+}
+.footer {
+  max-width: 80rem;
+}
+:root {
+  --vdp-hover-bg-color: theme('colors.primary');
+  --vdp-selected-bg-color: theme('colors.primary');
+}
+.calendar-input {
+  @apply p-2 pr-8;
+}
 </style>

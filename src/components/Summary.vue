@@ -16,16 +16,16 @@ const updateReservationData = (reservationData: any) => {
   room.checkinDate = reservationData.startDate;
   room.checkoutDate = reservationData.endDate;
   room.adults = reservationData.adults;
-}
-const saveHandler = () => {
-
 };
+const saveHandler = () => {};
 </script>
 
 <template>
   <div class="p-4 border border-gray-light">
     <h2 class="mb-8 text-xl"><strong>Reservation summary</strong></h2>
-    <h3 class="mb-4"><strong>{{ room.roomName }}</strong></h3>
+    <h3 class="mb-4">
+      <strong>{{ room.roomName }}</strong>
+    </h3>
     <div class="mb-4 space-y-8 text-sm">
       <div class="flex space-x-12">
         <div>
@@ -46,7 +46,7 @@ const saveHandler = () => {
         <p>{{ room.adults }} Adults</p>
       </div>
     </div>
-    <hr class="mb-4 border-0 border-t border-gray-light">
+    <hr class="mb-4 border-0 border-t border-gray-light" />
     <div class="flex justify-between mb-8">
       <p>Total</p>
       <p>{{ room.total }}</p>
