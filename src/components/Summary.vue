@@ -1,30 +1,41 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+
+interface HotelData {
+  name: string;
+  amount: number;
+}
+
+interface ReservationData {
+  startDate: Date;
+  endDate: Date;
+  adults: number;
+}
 
 const room = reactive({
-  roomName: '-',
-  checkinDate: '-',
-  checkoutDate: '-',
-  adults: '-',
-  total: '-',
+  roomName: '',
+  checkinDate: ref<Date | null>(null),
+  checkoutDate: ref<Date | null>(null),
+  adults: 0,
+  total: 0,
 });
-const updateHotelData = (hotelData: any) => {
-  room.roomName = hotelData.name;
-  room.total = hotelData.amount;
+
+const updateHotelData = ({name, amount}: HotelData) => {
+  room.roomName = name;
+  room.total = amount;
 };
-const updateReservationData = (reservationData: any) => {
-  room.checkinDate = reservationData.startDate;
-  room.checkoutDate = reservationData.endDate;
-  room.adults = reservationData.adults;
+const updateReservationData = ({startDate, endDate, adults}: ReservationData) => {
+  room.checkinDate = startDate;
+  room.checkoutDate = endDate;
+  room.adults = adults;
 };
 const saveHandler = () => {};
 </script>
-
 <template>
   <div class="p-4 border border-gray-light">
-    <h2 class="mb-8 text-xl"><strong>Reservation summary</strong></h2>
-    <h3 class="mb-4">
-      <strong>{{ room.roomName }}</strong>
+    <h2 class="mb-8 text-xl font-bold">Reservation summary</h2>
+    <h3 class="mb-4 font-bold">
+      {{ room.roomName }}
     </h3>
     <div class="mb-4 space-y-8 text-sm">
       <div class="flex space-x-12">
@@ -46,17 +57,17 @@ const saveHandler = () => {};
         <p>{{ room.adults }} Adults</p>
       </div>
     </div>
-    <hr class="mb-4 border-0 border-t border-gray-light" />
-    <div class="flex justify-between mb-8">
+    <hr />
+    <div class="summary">
       <p>Total</p>
       <p>{{ room.total }}</p>
     </div>
-    <button class="button" @click="saveHandler">Save</button>
+    <button @click="saveHandler">Save</button>
   </div>
 </template>
 
 <style scoped>
-.button {
+button {
   display: block;
   width: 100%;
   background-color: #0162B3;
@@ -66,5 +77,11 @@ const saveHandler = () => {};
   line-height: 1.5rem;
   min-width: 7rem;
   transition: all 0.3s ease;
+}
+hr{
+  @apply mb-4 border-0 border-t border-gray-light;
+}
+.summary {
+  @apply flex justify-between mb-8;
 }
 </style>
