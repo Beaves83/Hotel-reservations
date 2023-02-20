@@ -3,16 +3,9 @@
 import img1 from '@/assets/img/room_1.png';
 import img2 from '@/assets/img/room_2.png';
 import img3 from '@/assets/img/room_3.png';
+import { Room } from '@/src/interfaces.ts'
 
-interface Room {
-  name: string;
-  description: string;
-  size: string;
-  beds: number;
-  people: number;
-  amount: string;
-  image: string;
-}
+
 
 const props = defineProps<{ 
     selectRoom: {
@@ -80,7 +73,7 @@ const selectRoom = (room: Room) => {
           <p class="mb-6">Size: {{ room.size }}</p>
           <div class="flex items-baseline space-x-16">
             <div>
-              <img src='../assets/img/double-bed.svg' class="w-8 mb-1" />
+              <img src='@/assets/img/double-bed.svg' class="w-8 mb-1" />
               <p>Beds: {{ room.beds }}</p>
             </div>
             <div class="flex-1">People: {{ room.people }}</div>

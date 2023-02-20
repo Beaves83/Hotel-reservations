@@ -1,16 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-
-interface HotelData {
-  name: string;
-  amount: number;
-}
-
-interface ReservationData {
-  startDate: Date;
-  endDate: Date;
-  adults: number;
-}
+import { HotelData, ReservationData } from '@/src/interfaces.ts'
 
 const room = reactive({
   roomName: '',
@@ -32,12 +22,12 @@ const updateReservationData = ({startDate, endDate, adults}: ReservationData) =>
 const saveHandler = () => {};
 </script>
 <template>
-  <div class="p-4 border border-gray-light">
-    <h2 class="mb-8 text-xl font-bold">Reservation summary</h2>
+  <div class="summary">
+    <h2 class="summary-title">Reservation summary</h2>
     <h3 class="mb-4 font-bold">
       {{ room.roomName }}
     </h3>
-    <div class="mb-4 space-y-8 text-sm">
+    <div class="summary-checkin">
       <div class="flex space-x-12">
         <div>
           <p><strong>Check in</strong></p>
@@ -58,7 +48,7 @@ const saveHandler = () => {};
       </div>
     </div>
     <hr />
-    <div class="summary">
+    <div class="summary-total">
       <p>Total</p>
       <p>{{ room.total }}</p>
     </div>
@@ -67,6 +57,15 @@ const saveHandler = () => {};
 </template>
 
 <style scoped>
+.summary{
+  @apply p-4 border border-gray-light;
+}
+.summary-title{
+  @apply mb-8 text-xl font-bold;
+}
+.summary-checkin{
+  @apply mb-4 space-y-8 text-sm;
+}
 button {
   display: block;
   width: 100%;
@@ -81,7 +80,7 @@ button {
 hr{
   @apply mb-4 border-0 border-t border-gray-light;
 }
-.summary {
+.summary-total {
   @apply flex justify-between mb-8;
 }
 </style>
