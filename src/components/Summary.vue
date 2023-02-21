@@ -1,75 +1,64 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { HotelData, ReservationData } from '@/src/interfaces.ts'
+import { toRef, inject } from 'vue';
+import { reservationKey } from '@/keys';
 
-const room = reactive({
-  roomName: '',
-  checkinDate: ref<Date | null>(null),
-  checkoutDate: ref<Date | null>(null),
-  adults: 0,
-  total: 0,
-});
-
-const updateHotelData = ({name, amount}: HotelData) => {
-  room.roomName = name;
-  room.total = amount;
-};
-const updateReservationData = ({startDate, endDate, adults}: ReservationData) => {
-  room.checkinDate = startDate;
-  room.checkoutDate = endDate;
-  room.adults = adults;
-};
+const props = defineProps<{ room: Room }>();
+const room = toRef(props, 'room');
+const { reservation } = inject(reservationKey);
 const saveHandler = () => {};
 </script>
 <template>
   <div class="summary">
     <h2 class="summary-title">Reservation summary</h2>
     <h3 class="mb-4 font-bold">
-      {{ room.roomName }}
+      {{ room.name }}
     </h3>
     <div class="summary-checkin">
       <div class="flex space-x-12">
         <div>
-          <p><strong>Check in</strong></p>
+          <p class="font-bold">Check in</p>
           <p>From 15.00h</p>
         </div>
         <div>
-          <p><strong>Check out</strong></p>
+          <p class="font-bold">Check out</p>
           <p>Before 12.00h</p>
         </div>
       </div>
       <div>
-        <p><strong>Reservation date</strong></p>
-        <p>From {{ room.checkinDate }} to {{ room.checkoutDate }}</p>
+        <p class="font-bold">Reservation date</p>
+        <p v-if="reservation.startDate && reservation.endDate">
+          From {{ reservation.startDate }} to {{ reservation.endDate }}
+        </p>
       </div>
       <div>
-        <p><strong>People</strong></p>
-        <p>{{ room.adults }} Adults</p>
+        <p class="font-bold">People</p>
+        <p>{{ reservation.adults }} Adults</p>
+        <p>{{ reservation.children }} Children</p>
       </div>
     </div>
     <hr />
     <div class="summary-total">
       <p>Total</p>
-      <p>{{ room.total }}</p>
+      <p>{{ room.amount }}</p>
     </div>
     <button @click="saveHandler">Save</button>
   </div>
 </template>
 
 <style scoped>
-.summary{
+.summary {
   @apply p-4 border border-gray-light;
 }
-.summary-title{
+.summary-title {
   @apply mb-8 text-xl font-bold;
 }
-.summary-checkin{
+.summary-checkin {
   @apply mb-4 space-y-8 text-sm;
 }
 button {
   display: block;
   width: 100%;
-  background-color: #0162B3;
+  background-color: #0162b3;
   color: white;
   padding: 10px;
   font-size: 1rem;
@@ -77,7 +66,7 @@ button {
   min-width: 7rem;
   transition: all 0.3s ease;
 }
-hr{
+hr {
   @apply mb-4 border-0 border-t border-gray-light;
 }
 .summary-total {

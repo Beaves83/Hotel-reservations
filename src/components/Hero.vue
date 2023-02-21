@@ -1,28 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 
 import CustomSelect from '@/components/CustomSelect.vue';
 import Datepicker from 'vue3-datepicker';
+import { reservationKey } from '@/keys';
 
 const summary = ref(null); //todo: no es un string?
-const children = ref(0);
+const { updateReservation } = inject(reservationKey);
+
 const startDate = ref();
 const endDate = ref();
 const adults = ref(0);
+const children = ref(0);
 
 const modifyReservationHandler = () => {
-  if (summary.value) {
-    summary.value.updateReservationData({
-      startDate: new Intl.DateTimeFormat('es-ES').format(startDate.value),
-      endDate: new Intl.DateTimeFormat('es-ES').format(endDate.value),
-      adults: adults.value,
-    });
-    alert('Summary Updated');
-  }
+  updateReservation({
+    startDate: new Intl.DateTimeFormat('es-ES').format(startDate.value),
+    endDate: new Intl.DateTimeFormat('es-ES').format(endDate.value),
+    adults: adults.value,
+    children: children.value,
+  });
+  alert('Summary Updated');
 };
 </script>
 <template>
-   <div class="hero">
+  <div class="hero">
     <div class="hero-content">
       <div class="flex items-start space-x-4">
         <div class="calendar-wrapper">
@@ -34,16 +36,20 @@ const modifyReservationHandler = () => {
         <CustomSelect>
           <select v-model="adults">
             <option value="">Select Adults</option>
-            <option v-for="num in 5" :key="num" :value="num">Adults: {{ num }}</option>
+            <option v-for="num in 5" :key="num" :value="num">
+              Adults: {{ num }}
+            </option>
           </select>
         </CustomSelect>
         <CustomSelect>
           <select v-model="children">
             <option value="">Select Children</option>
-            <option v-for="num in 6" :key="num" :value="num">Children: {{ num }}</option>
+            <option v-for="num in 6" :key="num" :value="num">
+              Children: {{ num }}
+            </option>
           </select>
         </CustomSelect>
-        <button class="primary-btn" @click="modifyReservationHandler" >
+        <button class="primary-btn" @click="modifyReservationHandler">
           Modify
         </button>
       </div>
@@ -56,7 +62,7 @@ const modifyReservationHandler = () => {
   background-image: url(@/assets/img/los-cocos-room-header-2-x.png);
 }
 .hero-content {
-  @apply flex justify-center px-8 py-4 bg-primary bg-opacity-40
+  @apply flex justify-center px-8 py-4 bg-primary bg-opacity-40;
 }
 
 .calendar-wrapper {
@@ -79,5 +85,4 @@ const modifyReservationHandler = () => {
 .calendar-input {
   @apply p-2 pr-8;
 }
-
 </style>
