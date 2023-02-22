@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { toRef, inject } from 'vue';
 import { reservationKey } from '@/keys';
+import { ReservationGlobalState, Room } from '@/interfaces';
 
 const props = defineProps<{ room: Room }>();
 const room = toRef(props, 'room');
-const { reservation } = inject(reservationKey);
+
+const { reservation }: ReservationGlobalState =
+  inject<ReservationGlobalState>(reservationKey)!;
+
 const saveHandler = () => {};
 </script>
 <template>

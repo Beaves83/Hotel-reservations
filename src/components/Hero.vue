@@ -4,9 +4,10 @@ import { ref, inject } from 'vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import Datepicker from 'vue3-datepicker';
 import { reservationKey } from '@/keys';
+import { ReservationGlobalState } from '@/interfaces';
 
-const summary = ref(null); //todo: no es un string?
-const { updateReservation } = inject(reservationKey);
+const { updateReservation }: ReservationGlobalState =
+  inject<ReservationGlobalState>(reservationKey)!;
 
 const startDate = ref();
 const endDate = ref();
@@ -15,12 +16,11 @@ const children = ref(0);
 
 const modifyReservationHandler = () => {
   updateReservation({
-    startDate: new Intl.DateTimeFormat('es-ES').format(startDate.value),
-    endDate: new Intl.DateTimeFormat('es-ES').format(endDate.value),
+    startDate: startDate.value,
+    endDate: endDate.value,
     adults: adults.value,
     children: children.value,
   });
-  alert('Summary Updated');
 };
 </script>
 <template>

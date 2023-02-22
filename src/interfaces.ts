@@ -19,3 +19,8 @@ export interface Room {
   amount: string;
   image: string;
 }
+
+export interface ReservationGlobalState {
+  reservation: Reservation;
+  updateReservation: (reservation: Reservation) => void;
+}
