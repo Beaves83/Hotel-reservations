@@ -9,8 +9,14 @@ import { ReservationGlobalState } from '@/interfaces';
 const { updateReservation }: ReservationGlobalState =
   inject<ReservationGlobalState>(reservationKey)!;
 
-const startDate = ref();
-const endDate = ref();
+const getTomorrow = () => {
+  const date = new Date();
+  date.setDate(date.getDate() + 1);
+  return date;
+};
+
+const startDate = ref(new Date());
+const endDate = ref(getTomorrow());
 const adults = ref(0);
 const children = ref(0);
 
