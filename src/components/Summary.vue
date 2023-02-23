@@ -1,29 +1,33 @@
 <script setup lang="ts">
-import { toRef, inject, computed } from 'vue';
+import { toRef, ref, inject, computed, onMounted } from 'vue';
 import { reservationKey } from '@/keys';
 import { ReservationGlobalState, Room } from '@/interfaces';
 import { getFormattedDate } from '@/utils';
 
 const props = defineProps<{ room: Room }>();
 const room = toRef(props, 'room');
+const promoCode = ref<string | null>(null);
 
 const { reservation } = inject<ReservationGlobalState>(reservationKey)!;
 
+onMounted(() => {
+  const searchParams = new URLSearchParams(window.location.search);
+  promoCode.value = searchParams.get('promo_code')?.trim() || null;
+});
+
 const calcAmount = computed(() => {
-  if (
-    reservation.value.endDate &&
-    reservation.value.startDate &&
-    room.value.amount
-  ) {
-    const oneDay = 24 * 60 * 60 * 1000; // milliseconds in a day
+  const { endDate, startDate } = reservation.value;
+  const roomAmount = room.value.amount;
+
+  if (endDate && startDate && roomAmount) {
+    const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000; // milliseconds in a day
     const diffDays = Math.round(
-      Math.abs(
-        (reservation.value.endDate.valueOf() -
-          reservation.value.startDate.valueOf()) /
-          oneDay,
-      ),
+      Math.abs((endDate.valueOf() - startDate.valueOf()) / ONE_DAY_IN_MS),
     );
-    return room.value.amount * diffDays;
+    const finalPrice = promoCode.value
+      ? roomAmount * diffDays * ( 1 - parseInt(promoCode.value)/100)
+      : roomAmount * diffDays;
+    return finalPrice;
   }
   return 0;
 });
