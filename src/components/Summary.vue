@@ -2,18 +2,27 @@
 import { toRef, inject, computed } from 'vue';
 import { reservationKey } from '@/keys';
 import { ReservationGlobalState, Room } from '@/interfaces';
-import { getFormattedDate } from '@/utils'
+import { getFormattedDate } from '@/utils';
 
 const props = defineProps<{ room: Room }>();
 const room = toRef(props, 'room');
 
-const { reservation } =
-  inject<ReservationGlobalState>(reservationKey)!;
+const { reservation } = inject<ReservationGlobalState>(reservationKey)!;
 
-const calcAmount = computed( () => {
-  if(reservation.value.endDate && reservation.value.startDate && room.value.amount) {
+const calcAmount = computed(() => {
+  if (
+    reservation.value.endDate &&
+    reservation.value.startDate &&
+    room.value.amount
+  ) {
     const oneDay = 24 * 60 * 60 * 1000; // milliseconds in a day
-    const diffDays = Math.round(Math.abs((reservation.value.endDate.valueOf() - reservation.value.startDate.valueOf()) / oneDay));
+    const diffDays = Math.round(
+      Math.abs(
+        (reservation.value.endDate.valueOf() -
+          reservation.value.startDate.valueOf()) /
+          oneDay,
+      ),
+    );
     return room.value.amount * diffDays;
   }
   return 0;
@@ -39,7 +48,8 @@ const calcAmount = computed( () => {
       <div>
         <p class="font-bold">Reservation date</p>
         <p v-if="reservation.startDate && reservation.endDate">
-          From {{ getFormattedDate(reservation.startDate) }} to {{ getFormattedDate(reservation.endDate) }}
+          From {{ getFormattedDate(reservation.startDate) }} to
+          {{ getFormattedDate(reservation.endDate) }}
         </p>
       </div>
       <div>
