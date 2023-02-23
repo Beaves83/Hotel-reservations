@@ -34,14 +34,14 @@ const modifyReservationHandler = () => {
     <div class="hero-content">
       <div class="flex items-start space-x-4">
         <div class="calendar-wrapper">
-          <Datepicker v-model="startDate" class="calendar-input" />
+          <Datepicker v-model="startDate" class="calendar-input p-2 w-40" />
         </div>
         <div class="calendar-wrapper">
-          <Datepicker v-model="endDate" class="calendar-input" />
+          <Datepicker v-model="endDate" class="calendar-input p-2 w-40" />
         </div>
         <CustomSelect>
           <select v-model="adults">
-            <option value="">Select Adults</option>
+            <option disabled value="">Select Adults</option>
             <option v-for="num in 5" :key="num" :value="num">
               Adults: {{ num }}
             </option>
@@ -49,7 +49,7 @@ const modifyReservationHandler = () => {
         </CustomSelect>
         <CustomSelect>
           <select v-model="children">
-            <option value="">Select Children</option>
+            <option disabled value="true">Select Children</option>
             <option v-for="num in 6" :key="num" :value="num">
               Children: {{ num }}
             </option>
@@ -88,7 +88,18 @@ const modifyReservationHandler = () => {
   background-image: url(@/assets/img/calendar-empty.svg);
   z-index: 100;
 }
-.calendar-input {
-  @apply p-2 pr-8;
+select {
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  padding: 0 1em 0 0;
+  margin: 0;
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+  outline: none;
+  grid-area: select;
 }
 </style>

@@ -63,7 +63,7 @@ const calcAmount = computed(() => {
       <p>Total</p>
       <p>{{ calcAmount }} €</p>
     </div>
-    <button @click="saveHandler">Save</button>
+    <button class="primary-btn" @click="saveHandler">Save</button>
   </div>
 </template>
 

@@ -15,7 +15,7 @@ const selectRoom = (selectedRoom: Room) => {
 };
 </script>
 <template>
-  <div class="inline-block px-8 mb-16">
+  <div class="flex px-8 mb-16">
     <div class="float-left w-2/3">
       <Rooms @selectRoom="selectRoom" />
     </div>
