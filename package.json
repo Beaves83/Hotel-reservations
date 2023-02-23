@@ -17,9 +17,11 @@
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
+    "@testing-library/vue": "^6.6.1",
     "@types/node": "^16.11.17",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/eslint-config-typescript": "^10.0.0",
+    "@vue/test-utils": "^2.3.0",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.6.0",
