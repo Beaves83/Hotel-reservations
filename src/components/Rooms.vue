@@ -17,7 +17,7 @@ const myRooms: Room[] = [
     size: '20m2',
     beds: 2,
     people: 2,
-    amount: '200€',
+    amount: 200,
     image: img1,
   },
   {
@@ -27,7 +27,7 @@ const myRooms: Room[] = [
     size: '50m2',
     beds: 2,
     people: 4,
-    amount: '350€',
+    amount: 350,
     image: img2,
   },
   {
@@ -37,7 +37,7 @@ const myRooms: Room[] = [
     size: '125m2',
     beds: 3,
     people: 4,
-    amount: '450€',
+    amount: 450,
     image: img3,
   },
 ];

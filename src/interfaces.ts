@@ -1,3 +1,5 @@
+import { Ref } from 'vue';
+
 export interface Hotel {
   name: string;
   amount: number;
@@ -16,11 +18,11 @@ export interface Room {
   size: string;
   beds: number;
   people: number;
-  amount: string;
+  amount: number;
   image: string;
 }
 
 export interface ReservationGlobalState {
-  reservation: Reservation;
+  reservation: Ref<Reservation>;
   updateReservation: (reservation: Reservation) => void;
 }

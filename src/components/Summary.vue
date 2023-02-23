@@ -1,15 +1,23 @@
 <script setup lang="ts">
-import { toRef, inject } from 'vue';
+import { toRef, inject, computed } from 'vue';
 import { reservationKey } from '@/keys';
 import { ReservationGlobalState, Room } from '@/interfaces';
+import { getFormattedDate } from '@/utils'
 
 const props = defineProps<{ room: Room }>();
 const room = toRef(props, 'room');
 
-const { reservation }: ReservationGlobalState =
+const { reservation } =
   inject<ReservationGlobalState>(reservationKey)!;
 
-const saveHandler = () => {};
+const calcAmount = computed( () => {
+  if(reservation.value.endDate && reservation.value.startDate && room.value.amount) {
+    const oneDay = 24 * 60 * 60 * 1000; // milliseconds in a day
+    const diffDays = Math.round(Math.abs((reservation.value.endDate.valueOf() - reservation.value.startDate.valueOf()) / oneDay));
+    return room.value.amount * diffDays;
+  }
+  return 0;
+});
 </script>
 <template>
   <div class="summary">
@@ -31,7 +39,7 @@ const saveHandler = () => {};
       <div>
         <p class="font-bold">Reservation date</p>
         <p v-if="reservation.startDate && reservation.endDate">
-          From {{ reservation.startDate }} to {{ reservation.endDate }}
+          From {{ getFormattedDate(reservation.startDate) }} to {{ getFormattedDate(reservation.endDate) }}
         </p>
       </div>
       <div>
@@ -43,7 +51,7 @@ const saveHandler = () => {};
     <hr />
     <div class="summary-total">
       <p>Total</p>
-      <p>{{ room.amount }}</p>
+      <p>{{ calcAmount }} €</p>
     </div>
     <button @click="saveHandler">Save</button>
   </div>
