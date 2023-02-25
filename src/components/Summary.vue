@@ -25,12 +25,17 @@ const calcAmount = computed(() => {
       Math.abs((endDate.valueOf() - startDate.valueOf()) / ONE_DAY_IN_MS),
     );
     const finalPrice = promoCode.value
-      ? roomAmount * diffDays * ( 1 - parseInt(promoCode.value)/100)
+      ? roomAmount * diffDays * (1 - parseInt(promoCode.value) / 100)
       : roomAmount * diffDays;
     return finalPrice;
   }
   return 0;
 });
+
+const saveHandler = () => {
+  localStorage.setItem('room', JSON.stringify(room.value));
+  localStorage.setItem('reservation', JSON.stringify(reservation.value));
+};
 </script>
 <template>
   <div class="summary">

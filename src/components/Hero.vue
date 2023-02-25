@@ -4,28 +4,22 @@ import { ref, inject } from 'vue';
 import CustomSelect from '@/components/CustomSelect.vue';
 import Datepicker from 'vue3-datepicker';
 import { reservationKey } from '@/keys';
-import { ReservationGlobalState } from '@/interfaces';
+import { Reservation, ReservationGlobalState } from '@/interfaces';
 
-const { updateReservation }: ReservationGlobalState =
+const { updateReservation, reservation }: ReservationGlobalState =
   inject<ReservationGlobalState>(reservationKey)!;
 
-const getTomorrow = () => {
-  const date = new Date();
-  date.setDate(date.getDate() + 1);
-  return date;
-};
+const reservationCopyRef =ref<Reservation>( JSON.parse(JSON.stringify(reservation.value)));
 
-const startDate = ref(new Date());
-const endDate = ref(getTomorrow());
-const adults = ref(0);
-const children = ref(0);
+reservationCopyRef.value.endDate = new Date(reservationCopyRef.value.endDate);
+reservationCopyRef.value.startDate = new Date(reservationCopyRef.value.startDate);
 
 const modifyReservationHandler = () => {
   updateReservation({
-    startDate: startDate.value,
-    endDate: endDate.value,
-    adults: adults.value,
-    children: children.value,
+    startDate: reservationCopyRef.value.startDate,
+    endDate: reservationCopyRef.value.endDate,
+    adults: reservationCopyRef.value.adults,
+    children: reservationCopyRef.value.children,
   });
 };
 </script>
@@ -34,13 +28,19 @@ const modifyReservationHandler = () => {
     <div class="hero-content">
       <div class="flex items-start space-x-4">
         <div class="calendar-wrapper">
-          <Datepicker v-model="startDate" class="calendar-input p-2 w-40" />
+          <Datepicker
+            v-model="reservationCopyRef.startDate"
+            class="calendar-input p-2 w-40"
+          />
         </div>
         <div class="calendar-wrapper">
-          <Datepicker v-model="endDate" class="calendar-input p-2 w-40" />
+          <Datepicker
+            v-model="reservationCopyRef.endDate"
+            class="calendar-input p-2 w-40"
+          />
         </div>
         <CustomSelect>
-          <select v-model="adults">
+          <select v-model="reservationCopyRef.adults">
             <option disabled value="">Select Adults</option>
             <option v-for="num in 5" :key="num" :value="num">
               Adults: {{ num }}
@@ -48,7 +48,7 @@ const modifyReservationHandler = () => {
           </select>
         </CustomSelect>
         <CustomSelect>
-          <select v-model="children">
+          <select v-model="reservationCopyRef.children">
             <option disabled value="true">Select Children</option>
             <option v-for="num in 6" :key="num" :value="num">
               Children: {{ num }}

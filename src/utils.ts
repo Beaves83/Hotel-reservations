@@ -8,3 +8,9 @@ export const getFormattedDate = (date: Date) => {
     .padStart(2, '0')}/${year.toString().slice(-2)}`;
   return formattedDate;
 };
+
+export const getTomorrow = () => {
+  const date = new Date();
+  date.setDate(date.getDate() + 1);
+  return date;
+};

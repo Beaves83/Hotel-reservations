@@ -48,7 +48,6 @@ const selectRoom = (selectedRoom: Room) => {
 </script>
 <template>
   <div class="space-y-4">
-    <!-- TODO: Aplicar la deconstruccion {name, descr...} in myRooms si si en selectRoom al final solo necesitamos el id -->
     <div
       v-for="myRoom in myRooms"
       :key="myRoom.name"
