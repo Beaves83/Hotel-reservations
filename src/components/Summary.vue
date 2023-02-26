@@ -3,10 +3,12 @@ import { toRef, ref, inject, computed, onMounted } from 'vue';
 import { reservationKey } from '@/keys';
 import { ReservationGlobalState, Room } from '@/interfaces';
 import { getFormattedDate } from '@/utils';
+import MessagePop from '@/components/MessagePop.vue';
 
 const props = defineProps<{ room: Room }>();
 const room = toRef(props, 'room');
 const promoCode = ref<string | null>(null);
+const open = ref<boolean>(false);
 
 const { reservation } = inject<ReservationGlobalState>(reservationKey)!;
 
@@ -35,6 +37,10 @@ const calcAmount = computed(() => {
 const saveHandler = () => {
   localStorage.setItem('room', JSON.stringify(room.value));
   localStorage.setItem('reservation', JSON.stringify(reservation.value));
+  open.value = true;
+  setTimeout(() => {
+      open.value = false;
+    }, 2500);
 };
 </script>
 <template>
@@ -72,8 +78,9 @@ const saveHandler = () => {
       <p>Total</p>
       <p>{{ calcAmount }} €</p>
     </div>
-    <button class="primary-btn" @click="saveHandler">Save</button>
+    <button class="primary-btn rounded-md" @click="saveHandler">Save</button>
   </div>
+  <MessagePop v-if="open" title="Information" message="Your choice has been saved." @close="open = false"  />
 </template>
 
 <style scoped>
@@ -102,5 +109,12 @@ hr {
 }
 .summary-total {
   @apply flex justify-between mb-8;
+}
+.alert {
+  @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative;
+}
+
+.alert .close {
+  @apply absolute top-0 right-0 px-4 py-3;
 }
 </style>

@@ -5,9 +5,11 @@ import CustomSelect from '@/components/CustomSelect.vue';
 import Datepicker from 'vue3-datepicker';
 import { reservationKey } from '@/keys';
 import { Reservation, ReservationGlobalState } from '@/interfaces';
+import MessagePop from '@/components/MessagePop.vue';
 
 const { updateReservation, reservation }: ReservationGlobalState =
   inject<ReservationGlobalState>(reservationKey)!;
+    const open = ref<boolean>(false);
 
 const reservationCopyRef =ref<Reservation>( JSON.parse(JSON.stringify(reservation.value)));
 
@@ -21,6 +23,10 @@ const modifyReservationHandler = () => {
     adults: reservationCopyRef.value.adults,
     children: reservationCopyRef.value.children,
   });
+  open.value = true;
+  setTimeout(() => {
+      open.value = false;
+    }, 2500);
 };
 </script>
 <template>
@@ -31,12 +37,14 @@ const modifyReservationHandler = () => {
           <Datepicker
             v-model="reservationCopyRef.startDate"
             class="calendar-input p-2 w-40"
+            input-format="dd/MM/yyyy"
           />
         </div>
         <div class="calendar-wrapper">
           <Datepicker
             v-model="reservationCopyRef.endDate"
             class="calendar-input p-2 w-40"
+            input-format="dd/MM/yyyy"
           />
         </div>
         <CustomSelect>
@@ -55,12 +63,13 @@ const modifyReservationHandler = () => {
             </option>
           </select>
         </CustomSelect>
-        <button class="primary-btn" @click="modifyReservationHandler">
+        <button class="primary-btn rounded-lg" @click="modifyReservationHandler">
           Modify
         </button>
       </div>
     </div>
   </div>
+  <MessagePop v-if="open" title="Information" message="Your reservation summary has been updated." @close="open = false" />
 </template>
 <style scoped>
 .hero {
