@@ -1,21 +1,25 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
-
 import CustomSelect from '@/components/CustomSelect.vue';
 import Datepicker from 'vue3-datepicker';
 import { reservationKey } from '@/keys';
 import { Reservation, ReservationGlobalState } from '@/interfaces';
 import MessagePop from '@/components/MessagePop.vue';
 
+// Data
 const { updateReservation, reservation }: ReservationGlobalState =
   inject<ReservationGlobalState>(reservationKey)!;
-    const open = ref<boolean>(false);
+const open = ref<boolean>(false);
 
-const reservationCopyRef =ref<Reservation>( JSON.parse(JSON.stringify(reservation.value)));
-
+const reservationCopyRef = ref<Reservation>(
+  JSON.parse(JSON.stringify(reservation.value)),
+);
 reservationCopyRef.value.endDate = new Date(reservationCopyRef.value.endDate);
-reservationCopyRef.value.startDate = new Date(reservationCopyRef.value.startDate);
+reservationCopyRef.value.startDate = new Date(
+  reservationCopyRef.value.startDate,
+);
 
+// MethodsData
 const modifyReservationHandler = () => {
   updateReservation({
     startDate: reservationCopyRef.value.startDate,
@@ -25,8 +29,8 @@ const modifyReservationHandler = () => {
   });
   open.value = true;
   setTimeout(() => {
-      open.value = false;
-    }, 2500);
+    open.value = false;
+  }, 2500);
 };
 </script>
 <template>
@@ -63,13 +67,21 @@ const modifyReservationHandler = () => {
             </option>
           </select>
         </CustomSelect>
-        <button class="primary-btn rounded-lg" @click="modifyReservationHandler">
+        <button
+          class="primary-btn rounded-lg"
+          @click="modifyReservationHandler"
+        >
           Modify
         </button>
       </div>
     </div>
   </div>
-  <MessagePop v-if="open" title="Information" message="Your reservation summary has been updated." @close="open = false" />
+  <MessagePop
+    v-if="open"
+    title="Information"
+    message="Your reservation summary has been updated."
+    @close="open = false"
+  />
 </template>
 <style scoped>
 .hero {

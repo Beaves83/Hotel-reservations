@@ -7,9 +7,9 @@ import ProgressBar from '@/components/ProgressBar.vue';
 import RoomsSelector from '@/components/RoomsSelector.vue';
 import { Reservation } from '@/interfaces';
 import { getTomorrow } from '@/utils';
-
 import { reservationKey } from '@/keys';
 
+// Provides
 const reservation: Ref<Reservation> = ref({
   startDate: new Date(),
   endDate: getTomorrow(),
@@ -26,6 +26,7 @@ provide(reservationKey, {
   updateReservation,
 });
 
+// Lifecycle hooks
 onBeforeMount(() => {
   const reservationString = localStorage.getItem('reservation');
 

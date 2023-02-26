@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-
 import Rooms from '@/components/Rooms.vue';
 import Summary from '@/components/Summary.vue';
 import { Room } from '@/interfaces';
 
+// Data
 const summary = ref(null);
 const room: Room = ref({
   name: '',
@@ -16,10 +16,12 @@ const room: Room = ref({
   image: '',
 });
 
+// Methods
 const selectRoom = (selectedRoom: Room) => {
   room.value = selectedRoom;
 };
 
+// Lifecycle hooks
 onMounted(() => {
   const roomString = localStorage.getItem('room');
   if (roomString) {

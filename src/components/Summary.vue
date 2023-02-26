@@ -5,30 +5,42 @@ import { ReservationGlobalState, Room } from '@/interfaces';
 import { getFormattedDate } from '@/utils';
 import MessagePop from '@/components/MessagePop.vue';
 
+// Props
 const props = defineProps<{ room: Room }>();
 const room = toRef(props, 'room');
+
+// Data
 const promoCode = ref<string | null>(null);
 const open = ref<boolean>(false);
-
 const { reservation } = inject<ReservationGlobalState>(reservationKey)!;
 
+// Lyfecycle hooks
 onMounted(() => {
   const searchParams = new URLSearchParams(window.location.search);
   promoCode.value = searchParams.get('promo_code')?.trim() || null;
 });
 
-const calcAmount = computed(() => {
+// Methods
+const calcDiffDays = () => {
+  const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000; // milliseconds in a day
   const { endDate, startDate } = reservation.value;
-  const roomAmount = room.value.amount;
 
-  if (endDate && startDate && roomAmount) {
-    const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000; // milliseconds in a day
+  if (endDate && startDate) {
     const diffDays = Math.round(
       Math.abs((endDate.valueOf() - startDate.valueOf()) / ONE_DAY_IN_MS),
     );
+    return diffDays;
+  }
+  return 0;
+};
+
+const calcAmount = computed(() => {
+  const roomAmount = room.value.amount;
+
+  if (roomAmount) {
     const finalPrice = promoCode.value
-      ? roomAmount * diffDays * (1 - parseInt(promoCode.value) / 100)
-      : roomAmount * diffDays;
+      ? roomAmount * calcDiffDays() * (1 - parseInt(promoCode.value) / 100)
+      : roomAmount * calcDiffDays();
     return finalPrice;
   }
   return 0;
@@ -39,8 +51,8 @@ const saveHandler = () => {
   localStorage.setItem('reservation', JSON.stringify(reservation.value));
   open.value = true;
   setTimeout(() => {
-      open.value = false;
-    }, 2500);
+    open.value = false;
+  }, 2500);
 };
 </script>
 <template>
@@ -80,7 +92,12 @@ const saveHandler = () => {
     </div>
     <button class="primary-btn rounded-md" @click="saveHandler">Save</button>
   </div>
-  <MessagePop v-if="open" title="Information" message="Your choice has been saved." @close="open = false"  />
+  <MessagePop
+    v-if="open"
+    title="Information"
+    message="Your choice has been saved."
+    @close="open = false"
+  />
 </template>
 
 <style scoped>

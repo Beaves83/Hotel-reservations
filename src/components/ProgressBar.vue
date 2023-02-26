@@ -1,4 +1,3 @@
-<script setup lang="ts"></script>
 <template>
   <div class="progress-bar">
     <h1>Rooms & Rates</h1>
