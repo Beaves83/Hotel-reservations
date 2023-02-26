@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineEmits } from 'vue';
-import { myRooms } from '@/data';
+import { myRooms } from '../mockData';
 
 // Emits
 const emit = defineEmits(['selectRoom']);
@@ -34,7 +34,7 @@ const selectRoom = (selectedRoom: Room) => {
           <p class="mb-6">Size: {{ myRoom.size }}</p>
           <div class="flex items-baseline space-x-16">
             <div>
-              <img src="@/assets/img/double-bed.svg" class="w-8 mb-1" />
+              <img src="../assets/img/double-bed.svg" class="w-8 mb-1" />
               <p>Beds: {{ myRoom.beds }}</p>
             </div>
             <div class="flex-1">People: {{ myRoom.people }}</div>
