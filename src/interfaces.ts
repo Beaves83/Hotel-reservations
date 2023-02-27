@@ -6,8 +6,8 @@ export interface Hotel {
 }
 
 export interface Reservation {
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: Date;
+  endDate: Date;
   adults: number;
   children: number;
 }

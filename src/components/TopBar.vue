@@ -7,7 +7,7 @@
     </div>
     <div class="menu-logo">
       <img
-        src="@/assets/img/logo-cocos.png"
+        src="../assets/img/logo-cocos.png"
         alt="Hotel Los Cocos"
         class="logo"
       />

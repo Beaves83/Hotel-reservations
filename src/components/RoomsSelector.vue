@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import Rooms from '@/components/Rooms.vue';
-import Summary from '@/components/Summary.vue';
-import { Room } from '@/interfaces';
+import Rooms from './Rooms.vue';
+import Summary from './Summary.vue';
+import { Room } from '../interfaces';
 
 // Data
 const summary = ref(null);
-const room: Room = ref({
+const room = ref({
   name: '',
   description: '',
   size: '',
@@ -33,7 +33,7 @@ onMounted(() => {
 <template>
   <div class="flex px-8 mb-16">
     <div class="float-left w-2/3">
-      <Rooms @selectRoom="selectRoom" />
+      <Rooms @select-room="selectRoom" />
     </div>
     <div class="float-right w-1/3 pl-4">
       <Summary ref="summary" :room="room" />

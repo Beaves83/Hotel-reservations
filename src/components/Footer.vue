@@ -2,7 +2,11 @@
   <div class="footer">
     <div class="footer-links">
       <div>
-        <img src="@/assets/img/los-cocos-iso-footer.png" width="45" />
+        <img
+          src="../assets/img/los-cocos-iso-footer.png"
+          alt="Hotel Los Cocos"
+          width="45"
+        />
       </div>
       <a href="#">Terms and Conditions</a>
       <a href="#">Privacy Policy</a>
@@ -13,7 +17,11 @@
       <a href="#">reservations@loscocosbungalows.com</a>
       <a href="#">Tlf: +34 555 555 555</a>
       <div>
-        <img src="@/assets/img/footer_icons.png" width="125" />
+        <img
+          src="../assets/img/footer_icons.png"
+          alt="Social media icons"
+          width="125"
+        />
       </div>
     </div>
   </div>

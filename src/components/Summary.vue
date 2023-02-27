@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { toRef, ref, inject, computed, onMounted } from 'vue';
-import { reservationKey } from '@/keys';
-import { ReservationGlobalState, Room } from '@/interfaces';
-import { getFormattedDate } from '@/utils';
-import MessagePop from '@/components/MessagePop.vue';
+import { reservationKey } from '../keys';
+import { ReservationGlobalState, Room } from '../interfaces';
+import { getFormattedDate } from '../utils';
+import MessagePop from './MessagePop.vue';
 
 // Props
 const props = defineProps<{ room: Room }>();

@@ -2,7 +2,7 @@
   <div class="progress-bar">
     <h1>Rooms & Rates</h1>
     <p class="mb-4">Plan your perfect stay at your hotel</p>
-    <img src="@/assets/img/path.png" alt="Path" width="400" />
+    <img src="../assets/img/path.png" alt="Path" width="400" />
   </div>
 </template>
 <style scoped>

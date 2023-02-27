@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
-import CustomSelect from '@/components/CustomSelect.vue';
+import CustomSelect from './CustomSelect.vue';
 import Datepicker from 'vue3-datepicker';
-import { reservationKey } from '@/keys';
+import { reservationKey } from '../keys';
 import { Reservation, ReservationGlobalState } from '@/interfaces';
-import MessagePop from '@/components/MessagePop.vue';
+import MessagePop from './MessagePop.vue';
 
 // Data
 const { updateReservation, reservation }: ReservationGlobalState =

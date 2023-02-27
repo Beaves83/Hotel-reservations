@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineEmits } from 'vue';
 import { myRooms } from '../mockData';
+import { Room } from '../interfaces';
 
 // Emits
 const emit = defineEmits(['selectRoom']);
@@ -16,6 +17,7 @@ const selectRoom = (selectedRoom: Room) => {
       v-for="myRoom in myRooms"
       :key="myRoom.name"
       class="room"
+      role="room"
       @click="selectRoom(myRoom)"
     >
       <div class="flex space-x-4">
