@@ -1,21 +1,31 @@
-# Frontend Developer Test
+# Hotel Booking Web Application
 
-One of our hotel clients needs help improving a web application. This one manages the booking process. It already has an initial development but at THN we think it can be improved.
+## Description
 
-The project must meet the following objectives:
-- Check-in and check-out dates must be today and tomorrow.
-- When clicking on the "Modify" button, the "Summary" section information must be updated.
-- When selecting one of the 3 hotel options, the "Summary" section information must be updated.
-- When clicking on the "Save" button, the information must be saved locally. This means that when refreshing the browser, the data must be kept.
-- When `promo_code` parameter is within the URL, a discount must be applied on the final price. E.g: `dummyurl.com?promo_code=10` applies a 10% discount on the Summary section
+This project is a small hotel booking web application that allows users to book hotels for dates of their choice. 
 
-Nice to have:
-The web application should be optimized for mobile devices and maintain the current development framework (Vue)
+The project has the following functionalities:
 
-## Reminder:
-The sky is the limit. Don't limit yourself to meet the requirements, you can take it a step further by improving the framework usage, project architecture, fixing bugs, etc. We are expecting you to deliver the project as you would deliver it in a real case scenario.
+- Check-in and check-out dates are today and tomorrow.
+- When clicking on the "Modify" button, the "Summary" section information is updated.
+- When selecting one of the 3 hotel options, the "Summary" section information is updated.
+- When clicking on the "Save" button, the information must is saved locally. This means that when refreshing the browser, the data are retained.
+- When `promo_code` parameter is within the URL, a discount is applied on the final price. E.g: `dummyurl.com?promo_code=10` applies a 10% discount on the Summary section
 
----
+## Technologies Used
+
+The following technologies were used in the development of this project:
+
+- Vue 3 composition API (script setup): a JavaScript framework for building user interfaces.
+- HTML and CSS: for the structure and styling of the web application.
+- Tailwind CSS was used as a utility-first CSS framework.
+- TypeScript: for the logic and interactivity of the web application.
+- Vitest with Testing Library: for testing the web application.
+
+## TODO
+- The web application optimizes for mobile devices 
+- 
+
 
 ## Project Setup
 
@@ -33,10 +43,4 @@ yarn run dev
 
 ```sh
 yarn run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
